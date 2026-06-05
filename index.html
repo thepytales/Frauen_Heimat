@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Lern-App: Heimatfront im 1. WK</title>
+    
+    <!-- PWA Manifest Verknüpfung -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+
     <style>
         :root {
             --primary: #2c3e50;
@@ -345,6 +350,21 @@
     </div>
 
     <script>
+        // --- PWA SERVICE WORKER REGISTRATION ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker erfolgreich registriert. Scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker Registrierung fehlgeschlagen:', error);
+                    });
+            });
+        }
+
+        // --- APP LOGIC ---
+        
         // Tab Switching Logic
         function switchTab(tabName) {
             document.getElementById('learn-section').style.display = 'none';
@@ -464,7 +484,6 @@
         }
 
         function checkAnswer(selectedIndex, btn) {
-            // Disable all buttons
             const buttons = optionsContainer.getElementsByTagName("button");
             for (let b of buttons) {
                 b.disabled = true;
