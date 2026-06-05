@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lern-App: Heimatfront im 1. WK</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --light-bg: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            margin: 20px 0 10px 0;
+            font-size: 1.1rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 3px;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.3s;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion:after {
+            content: '\002B';
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .active:after {
+            content: "\2212";
+        }
+
+        .panel {
+            padding: 0 15px;
+            background-color: var(--light-bg);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            border-radius: 0 0 8px 8px;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .panel-content {
+            padding: 15px 0;
+        }
+
+        .panel-content ul {
+            padding-left: 20px;
+        }
+
+        .panel-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-top: 10px;
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            background-color: var(--bg-color);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: left;
+        }
+
+        .options button:active {
+            background-color: #ddd;
+        }
+
+        .options button.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .options button.wrong {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+            font-size: 0.9rem;
+            background-color: #e2e3e5;
+        }
+
+        .next-btn {
+            display: none;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Heimatfront 1914-1918</h1>
+        <p>Prüfungsvorbereitung: Frauen & Geschlechterverhältnisse</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Lernbereich</h2>
+
+        <button class="accordion">Ute Daniel: Mythos Frauenarbeit</button>
+        <div class="panel">
+            <div class="panel-content">
+                <p><strong>Die optische Täuschung:</strong> Die Gesamtzahl der arbeitenden Frauen stieg im Krieg kaum. Hausfrauen blieben meist zu Hause.</p>
+                <br>
+                <p><strong>Sektorale Verschiebung:</strong> Frauen wechselten aus schlecht bezahlten Jobs (Landwirtschaft, Textil) in die lukrative Rüstungsindustrie.</p>
+                <br>
+                <p><strong>Sichtbarkeit:</strong> Da sie nun im öffentlichen Raum (Post, Straßenbahn) arbeiteten, wirkte es wie ein massenhafter Zuwachs.</p>
+                <br>
+                <p><strong>Emanzipation auf Widerruf:</strong> Mit der Demobilmachung 1918 wurden Frauen systematisch entlassen, um Platz für Soldaten zu machen. Es gab keine dauerhafte Emanzipation im Berufsleben.</p>
+            </div>
+        </div>
+
+        <button class="accordion">Ute Daniel: Politisierung des Alltags</button>
+        <div class="panel">
+            <div class="panel-content">
+                <ul>
+                    <li><strong>Mangelwirtschaft:</strong> Die Beschaffung von Nahrung wurde zum Hauptproblem (Steckrübenwinter).</li>
+                    <li><strong>Doppelbelastung:</strong> 10-12 Stunden Fabrikarbeit plus Schlangestehen und Kindererziehung.</li>
+                    <li><strong>Protest:</strong> Der Hunger politisierte die Frauen. Sie organisierten Lebensmittelkrawalle und untergruben die Legitimität des Staates.</li>
+                </ul>
+            </div>
+        </div>
+
+        <button class="accordion">Birthe Kundrus: Die Kriegerfrauen</button>
+        <div class="panel">
+            <div class="panel-content">
+                <p><strong>Staatliche Unterstützung:</strong> Der Staat zahlte Familienunterhalt für die abwesenden Ehemänner. Der Staat griff massiv ins Private ein.</p>
+                <br>
+                <p><strong>Moralische Kontrolle:</strong> Das Geld war an "Sittlichkeit" geknüpft. Wohlfahrtspflegerinnen überwachten die Frauen auf Treue und Alkoholkonsum.</p>
+                <br>
+                <p><strong>Entfremdung:</strong> Männer erlebten das Grauen der Front, Frauen den Überlebenskampf in der Heimat. Diese extrem unterschiedlichen Erfahrungen führten nach 1918 oft zu zerrütteten Ehen.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Interaktives Quiz</h2>
+
+        <div class="quiz-container">
+            <div id="quiz-content">
+                <div class="question" id="question-text">Lade Quiz...</div>
+                <div class="options" id="options-container">
+                    </div>
+                <div class="feedback" id="feedback-text"></div>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Accordion Logic
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+
+        // Quiz Logic
+        const questions = [
+            {
+                question: "Was versteht Ute Daniel unter der 'Emanzipation auf Widerruf'?",
+                options: [
+                    "Frauen durften nur mit Erlaubnis ihrer Ehemänner arbeiten.",
+                    "Frauen wurden nach Kriegsende 1918 wieder systematisch aus der Rüstungsindustrie entlassen.",
+                    "Die Frauen verloren 1918 das Wahlrecht wieder."
+                ],
+                correct: 1,
+                explanation: "Richtig! Mit der Demobilmachung mussten Frauen ihre gut bezahlten Jobs in der Industrie räumen, um Platz für heimkehrende Soldaten zu machen."
+            },
+            {
+                question: "Warum wirkte es im Ersten Weltkrieg so, als gäbe es massenhaft neue arbeitende Frauen?",
+                options: [
+                    "Weil Millionen Hausfrauen plötzlich arbeiten gingen.",
+                    "Weil die Löhne für Frauen extrem angehoben wurden.",
+                    "Weil Frauen aus anderen Sektoren in 'Männerberufe' wechselten und im öffentlichen Raum sichtbarer wurden."
+                ],
+                correct: 2,
+                explanation: "Korrekt! Die Gesamtzahl der erwerbstätigen Frauen stieg kaum. Es war eine sektorale Verschiebung, die zu einer 'optischen Täuschung' führte (Ute Daniel)."
+            },
+            {
+                question: "Welchen Aspekt rückt Birthe Kundrus bei den 'Kriegerfrauen' besonders in den Fokus?",
+                options: [
+                    "Die hohe Zahl an Frauen, die direkt an der Waffe dienten.",
+                    "Die finanzielle Unterstützung durch den Staat, die mit strikter moralischer Überwachung einherging.",
+                    "Den massiven wirtschaftlichen Reichtum, den Frauen durch Kriegsanleihen aufbauten."
+                ],
+                correct: 1,
+                explanation: "Stimmt! Kundrus betont die Ambivalenz: Der Staat sicherte das Überleben, agierte aber gleichzeitig als kontrollierender 'Ersatz-Patriarch'."
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        const questionText = document.getElementById("question-text");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackText = document.getElementById("feedback-text");
+        const nextBtn = document.getElementById("next-btn");
+
+        function loadQuestion() {
+            feedbackText.style.display = "none";
+            nextBtn.style.display = "none";
+            optionsContainer.innerHTML = "";
+            
+            const q = questions[currentQuestion];
+            questionText.innerText = `Frage ${currentQuestion + 1}/${questions.length}: ${q.question}`;
+
+            q.options.forEach((option, index) => {
+                const btn = document.createElement("button");
+                btn.innerText = option;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(selectedIndex, btn) {
+            // Disable all buttons
+            const buttons = optionsContainer.getElementsByTagName("button");
+            for (let b of buttons) {
+                b.disabled = true;
+            }
+
+            const q = questions[currentQuestion];
+            
+            if (selectedIndex === q.correct) {
+                btn.classList.add("correct");
+            } else {
+                btn.classList.add("wrong");
+                buttons[q.correct].classList.add("correct");
+            }
+
+            feedbackText.innerText = q.explanation;
+            feedbackText.style.display = "block";
+            
+            if (currentQuestion < questions.length - 1) {
+                nextBtn.style.display = "block";
+                nextBtn.innerText = "Nächste Frage";
+            } else {
+                nextBtn.style.display = "block";
+                nextBtn.innerText = "Quiz neu starten";
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion >= questions.length) {
+                currentQuestion = 0;
+            }
+            loadQuestion();
+        }
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
