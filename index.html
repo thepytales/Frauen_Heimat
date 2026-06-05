@@ -11,6 +11,7 @@
             --bg-color: #f4f7f6;
             --text-color: #333;
             --light-bg: #fff;
+            --tab-inactive: #34495e;
         }
 
         * {
@@ -24,18 +25,21 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding-bottom: 50px;
         }
 
+        /* Header & Navigation */
         header {
             background-color: var(--primary);
             color: white;
-            padding: 20px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-titles {
+            padding: 15px 20px;
         }
 
         header h1 {
@@ -44,19 +48,45 @@
         }
 
         header p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             opacity: 0.8;
         }
 
+        .tabs {
+            display: flex;
+            width: 100%;
+            background-color: var(--tab-inactive);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active-tab {
+            background-color: var(--secondary);
+            border-bottom: 3px solid white;
+        }
+
+        /* Content Area */
         .container {
             padding: 15px;
             max-width: 600px;
             margin: 0 auto;
+            padding-bottom: 50px;
         }
 
         .section-title {
-            margin: 20px 0 10px 0;
-            font-size: 1.1rem;
+            margin: 15px 0;
+            font-size: 1.2rem;
             color: var(--primary);
             border-bottom: 2px solid var(--secondary);
             display: inline-block;
@@ -110,10 +140,12 @@
 
         .panel-content {
             padding: 15px 0;
+            font-size: 0.95rem;
         }
 
         .panel-content ul {
             padding-left: 20px;
+            margin-top: 10px;
         }
 
         .panel-content li {
@@ -126,7 +158,6 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-top: 10px;
         }
 
         .question {
@@ -192,64 +223,145 @@
 <body>
 
     <header>
-        <h1>Heimatfront 1914-1918</h1>
-        <p>Prüfungsvorbereitung: Frauen & Geschlechterverhältnisse</p>
+        <div class="header-titles">
+            <h1>Heimatfront 1914-1918</h1>
+            <p>Fokus: Frauen & Geschlechterverhältnisse</p>
+        </div>
+        <div class="tabs">
+            <button class="tab-btn active-tab" id="tab-learn" onclick="switchTab('learn')">📖 Lernen</button>
+            <button class="tab-btn" id="tab-quiz" onclick="switchTab('quiz')">❓ Quiz</button>
+        </div>
     </header>
 
     <div class="container">
         
-        <h2 class="section-title">Lernbereich</h2>
+        <!-- SECTION: LERNEN -->
+        <div id="learn-section">
+            <h2 class="section-title">1. Grundlagen & Vorkriegszeit</h2>
+            
+            <button class="accordion">Die Rolle der Frau vor 1914</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Im deutschen Kaiserreich galt ein strenges <strong>Patriarchat</strong> ("Kinder, Küche, Kirche").</p>
+                    <ul>
+                        <li>Frauen hatten <strong>kein Wahlrecht</strong> und durften bis 1908 nicht einmal Mitglied in politischen Parteien werden.</li>
+                        <li>Das Bürgerliche Gesetzbuch (BGB) von 1900 unterstellte die Ehefrau dem Mann. Er durfte z.B. ihren Job fristlos kündigen, wenn er meinte, der Haushalt leide darunter.</li>
+                        <li>Erwerbstätig waren meist nur unverheiratete, junge Frauen oder Frauen aus der armen Arbeiterschicht (oft in Landwirtschaft, Textilindustrie oder als Dienstmädchen).</li>
+                    </ul>
+                </div>
+            </div>
 
-        <button class="accordion">Ute Daniel: Mythos Frauenarbeit</button>
-        <div class="panel">
-            <div class="panel-content">
-                <p><strong>Die optische Täuschung:</strong> Die Gesamtzahl der arbeitenden Frauen stieg im Krieg kaum. Hausfrauen blieben meist zu Hause.</p>
-                <br>
-                <p><strong>Sektorale Verschiebung:</strong> Frauen wechselten aus schlecht bezahlten Jobs (Landwirtschaft, Textil) in die lukrative Rüstungsindustrie.</p>
-                <br>
-                <p><strong>Sichtbarkeit:</strong> Da sie nun im öffentlichen Raum (Post, Straßenbahn) arbeiteten, wirkte es wie ein massenhafter Zuwachs.</p>
-                <br>
-                <p><strong>Emanzipation auf Widerruf:</strong> Mit der Demobilmachung 1918 wurden Frauen systematisch entlassen, um Platz für Soldaten zu machen. Es gab keine dauerhafte Emanzipation im Berufsleben.</p>
+            <button class="accordion">Kriegsausbruch & "Heimatfront"</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Der Begriff <strong>Heimatfront</strong> bedeutet, dass in einem "Totalen Krieg" die Zivilbevölkerung (Heimat) genauso kriegswichtig ist wie die Soldaten (Front). Ohne Waffenproduktion und Nahrung aus der Heimat bricht die Front zusammen.</p>
+                    <ul>
+                        <li><strong>August 1914:</strong> Viele Frauen aus dem Bürgertum engagierten sich euphorisch freiwillig, z.B. im Nationalen Frauendienst oder im Roten Kreuz als Krankenschwestern.</li>
+                        <li>Das traditionelle Rollenbild (pflegende, sich aufopfernde Frau) wurde dadurch zunächst sogar gestärkt.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">2. Kriegsalltag & Arbeit</h2>
+
+            <button class="accordion">Arbeit & Hilfsdienstgesetz (1916)</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Je länger der Krieg dauerte, desto mehr Männer fehlten in den Fabriken.</p>
+                    <ul>
+                        <li><strong>Vaterländisches Hilfsdienstgesetz (1916):</strong> Verpflichtete alle Männer zwischen 16 und 60 Jahren, die nicht an der Front waren, zur Arbeit in der Kriegswirtschaft.</li>
+                        <li><strong>Frauen wurden nicht gesetzlich verpflichtet!</strong> Aber es gab massive Propaganda-Kampagnen ("Frauen, arbeitet!"), um sie als Freiwillige in die Rüstungsindustrie zu holen.</li>
+                        <li><strong>Gefährliche Arbeit:</strong> Frauen arbeiteten an Hochöfen und mit Sprengstoff. Wegen der Hautverfärbung durch die giftige Pikrinsäure nannte man Arbeiterinnen in Munitionsfabriken oft "Kanarienvögel" oder "Gelblinge".</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="accordion">Der Mangel & Politisierung</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Frauen erlebten eine extreme <strong>Doppel- und Dreifachbelastung</strong> (Fabrikarbeit, Kindererziehung, Nahrungsbeschaffung).</p>
+                    <ul>
+                        <li><strong>Ersatzlebensmittel:</strong> Es gab kaum noch Fleisch oder Fett. Man buk "K-Brot" (Kriegsbrot, oft gestreckt mit Kartoffeln oder Sägemehl).</li>
+                        <li><strong>Steckrübenwinter 1916/17:</strong> Eine katastrophale Hungersnot. Die Menschen aßen fast nur noch Steckrüben. Kohle zum Heizen fehlte.</li>
+                        <li><strong>Politisierung (nach Ute Daniel):</strong> Das stundenlange Schlangestehen und der Hunger trieben die Frauen auf die Barrikaden. Sie initiierten <strong>Lebensmittelkrawalle und Streiks</strong>. Der Staat verlor seine Autorität, weil er seine Bürger nicht mehr ernähren konnte.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-title">3. Forschungsdebatten (Prüfungswissen)</h2>
+
+            <button class="accordion">Ute Daniel: Mythos & Emanzipation auf Widerruf</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Ute Daniel widmet sich vor allem den <strong>Arbeiterfrauen</strong> und räumt mit dem Mythos auf, der Krieg habe massenhaft neue Frauen in Lohn und Brot gebracht.</p>
+                    <ul>
+                        <li><strong>Optische Täuschung:</strong> Die Gesamtzahl der arbeitenden Frauen stieg kaum. Es gab nur eine gigantische "Binnenwanderung". Frauen wechselten aus schlecht bezahlten Jobs (Dienstmädchen) in die Rüstungsindustrie, weil es dort mehr Geld gab.</li>
+                        <li><strong>Neue Sichtbarkeit:</strong> Da Frauen nun als Postbotinnen oder Schaffnerinnen im öffentlichen Raum auftraten, dachten die Zeitgenossen, es gäbe plötzlich eine Explosion der Frauenarbeit.</li>
+                        <li><strong>Emanzipation auf Widerruf:</strong> Kurz nach Kriegsende im November 1918 wurden die Frauen per "Demobilmachungsverordnungen" rigoros aus der Industrie entlassen. Sie mussten ihre Jobs den heimkehrenden Soldaten zurückgeben.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="accordion">Birthe Kundrus: Die "Kriegerfrauen"</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p>Birthe Kundrus blickt auf die <strong>Ehefrauen</strong> der Soldaten und das Eingreifen des Staates in die Familie.</p>
+                    <ul>
+                        <li><strong>Staatliche Familienhilfe:</strong> Da der Ehemann an der Front war, zahlte der Staat einen Unterhalt an die Familien in der Heimat. Die Frau wurde vom Staat abhängig.</li>
+                        <li><strong>Moralische Kontrolle:</strong> Der Staat agierte als "Ersatz-Patriarch". Wohlfahrtspflegerinnen überwachten die Frauen streng: Wer Alkohol trank, "verschwenderisch" lebte oder angeblich untreu war, dem konnte das Geld gestrichen werden.</li>
+                        <li><strong>Entfremdung:</strong> Männer machten brutale Gewalterfahrungen an der Front, Frauen extremen Überlebenskampf in der Heimat. Nach 1918 passten diese unterschiedlichen Welten oft nicht mehr zusammen, was zu tiefen familiären und gesellschaftlichen Krisen führte.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="accordion">Fazit: War der 1. WK ein Motor der Emanzipation?</button>
+            <div class="panel">
+                <div class="panel-content">
+                    <p><strong>Die Antwort ist: Jein (Ambivalenz).</strong></p>
+                    <ul>
+                        <li><strong>Politisch: JA!</strong> Ohne den Einsatz der Frauen an der Heimatfront und die Revolution 1918 wäre die Einführung des <strong>Frauenwahlrechts (November 1918)</strong> nicht so schnell passiert. Frauen waren politisch erwacht.</li>
+                        <li><strong>Wirtschaftlich: NEIN!</strong> Auf dem Arbeitsmarkt war es eine "Leih-Emanzipation" (Daniel). Nach dem Krieg kehrten die alten Geschlechterhierarchien im Berufsleben sofort zurück.</li>
+                        <li><strong>Gesellschaftlich: AMBIVALENT!</strong> Frauen wurden eigenständiger, weil sie jahrelang die Familie allein durchbringen mussten. Gleichzeitig blieben sie Objekte staatlicher Kontrolle (Kundrus).</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <button class="accordion">Ute Daniel: Politisierung des Alltags</button>
-        <div class="panel">
-            <div class="panel-content">
-                <ul>
-                    <li><strong>Mangelwirtschaft:</strong> Die Beschaffung von Nahrung wurde zum Hauptproblem (Steckrübenwinter).</li>
-                    <li><strong>Doppelbelastung:</strong> 10-12 Stunden Fabrikarbeit plus Schlangestehen und Kindererziehung.</li>
-                    <li><strong>Protest:</strong> Der Hunger politisierte die Frauen. Sie organisierten Lebensmittelkrawalle und untergruben die Legitimität des Staates.</li>
-                </ul>
-            </div>
-        </div>
-
-        <button class="accordion">Birthe Kundrus: Die Kriegerfrauen</button>
-        <div class="panel">
-            <div class="panel-content">
-                <p><strong>Staatliche Unterstützung:</strong> Der Staat zahlte Familienunterhalt für die abwesenden Ehemänner. Der Staat griff massiv ins Private ein.</p>
-                <br>
-                <p><strong>Moralische Kontrolle:</strong> Das Geld war an "Sittlichkeit" geknüpft. Wohlfahrtspflegerinnen überwachten die Frauen auf Treue und Alkoholkonsum.</p>
-                <br>
-                <p><strong>Entfremdung:</strong> Männer erlebten das Grauen der Front, Frauen den Überlebenskampf in der Heimat. Diese extrem unterschiedlichen Erfahrungen führten nach 1918 oft zu zerrütteten Ehen.</p>
-            </div>
-        </div>
-
-        <h2 class="section-title">Interaktives Quiz</h2>
-
-        <div class="quiz-container">
-            <div id="quiz-content">
-                <div class="question" id="question-text">Lade Quiz...</div>
-                <div class="options" id="options-container">
+        <!-- SECTION: QUIZ -->
+        <div id="quiz-section" style="display: none;">
+            <h2 class="section-title">Wissenstest</h2>
+            <div class="quiz-container">
+                <div id="quiz-content">
+                    <div class="question" id="question-text">Lade Quiz...</div>
+                    <div class="options" id="options-container">
+                        <!-- Buttons will be generated here -->
                     </div>
-                <div class="feedback" id="feedback-text"></div>
-                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+                    <div class="feedback" id="feedback-text"></div>
+                    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
+        // Tab Switching Logic
+        function switchTab(tabName) {
+            document.getElementById('learn-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'none';
+            
+            document.getElementById('tab-learn').classList.remove('active-tab');
+            document.getElementById('tab-quiz').classList.remove('active-tab');
+
+            if (tabName === 'learn') {
+                document.getElementById('learn-section').style.display = 'block';
+                document.getElementById('tab-learn').classList.add('active-tab');
+            } else {
+                document.getElementById('quiz-section').style.display = 'block';
+                document.getElementById('tab-quiz').classList.add('active-tab');
+            }
+        }
+
         // Accordion Logic
         var acc = document.getElementsByClassName("accordion");
         for (var i = 0; i < acc.length; i++) {
@@ -267,24 +379,54 @@
         // Quiz Logic
         const questions = [
             {
-                question: "Was versteht Ute Daniel unter der 'Emanzipation auf Widerruf'?",
+                question: "Welche gesellschaftliche Situation fanden Frauen VOR dem 1. Weltkrieg im Deutschen Kaiserreich vor?",
                 options: [
-                    "Frauen durften nur mit Erlaubnis ihrer Ehemänner arbeiten.",
-                    "Frauen wurden nach Kriegsende 1918 wieder systematisch aus der Rüstungsindustrie entlassen.",
-                    "Die Frauen verloren 1918 das Wahlrecht wieder."
+                    "Sie hatten das Wahlrecht, durften aber nicht arbeiten.",
+                    "Es herrschte ein starkes Patriarchat. Das BGB unterstellte Frauen dem Ehemann, sie hatten kein Wahlrecht.",
+                    "Frauen und Männer waren gesetzlich bereits völlig gleichgestellt."
                 ],
                 correct: 1,
-                explanation: "Richtig! Mit der Demobilmachung mussten Frauen ihre gut bezahlten Jobs in der Industrie räumen, um Platz für heimkehrende Soldaten zu machen."
+                explanation: "Richtig! Frauen waren politisch entmündigt und auch das BGB von 1900 sicherte die Machtposition des Ehemannes rechtlich ab."
             },
             {
-                question: "Warum wirkte es im Ersten Weltkrieg so, als gäbe es massenhaft neue arbeitende Frauen?",
+                question: "Wer wurde durch das 'Vaterländische Hilfsdienstgesetz' von 1916 zur Arbeit in der Kriegswirtschaft verpflichtet?",
+                options: [
+                    "Alle Frauen zwischen 18 und 40 Jahren.",
+                    "Sowohl Männer als auch Frauen ohne Kinder.",
+                    "Nur Männer zwischen 16 und 60 Jahren, die nicht an der Front waren."
+                ],
+                correct: 2,
+                explanation: "Korrekt! Frauen wurden gesetzlich nicht verpflichtet. Die Rüstungsindustrie versuchte sie jedoch durch massive Werbekampagnen als Freiwillige zu gewinnen."
+            },
+            {
+                question: "Was versteht Ute Daniel unter der 'Emanzipation auf Widerruf'?",
+                options: [
+                    "Frauen wurden nach Kriegsende 1918 systematisch aus der Rüstungsindustrie entlassen.",
+                    "Frauen durften nur mit Erlaubnis ihrer Ehemänner arbeiten.",
+                    "Die Frauen verloren 1918 das Wahlrecht wieder."
+                ],
+                correct: 0,
+                explanation: "Richtig! Mit der Demobilmachung 1918/19 mussten Frauen ihre gut bezahlten Jobs in der Industrie sofort räumen, um Platz für heimkehrende Soldaten zu machen."
+            },
+            {
+                question: "Warum wirkte es im Ersten Weltkrieg so, als gäbe es massenhaft neue arbeitende Frauen (Optische Täuschung)?",
                 options: [
                     "Weil Millionen Hausfrauen plötzlich arbeiten gingen.",
                     "Weil die Löhne für Frauen extrem angehoben wurden.",
                     "Weil Frauen aus anderen Sektoren in 'Männerberufe' wechselten und im öffentlichen Raum sichtbarer wurden."
                 ],
                 correct: 2,
-                explanation: "Korrekt! Die Gesamtzahl der erwerbstätigen Frauen stieg kaum. Es war eine sektorale Verschiebung, die zu einer 'optischen Täuschung' führte (Ute Daniel)."
+                explanation: "Korrekt! Die Gesamtzahl der erwerbstätigen Frauen stieg kaum. Es war lediglich eine sektorale Verschiebung in die Industrie und in den öffentlichen Raum."
+            },
+            {
+                question: "Wie kam es nach Ute Daniel zur 'Politisierung des Alltags' an der Heimatfront?",
+                options: [
+                    "Durch das stundenlange Schlangestehen und den Hunger (Steckrübenwinter), was zu Lebensmittelkrawallen und Streiks führte.",
+                    "Durch den massenhaften Eintritt von Frauen in die SPD.",
+                    "Weil die Frauen an der Front kämpfen wollten und dies vom Staat verboten wurde."
+                ],
+                correct: 0,
+                explanation: "Stimmt! Der Staat verlor seine Autorität, weil er seine Bevölkerung nicht mehr ernähren konnte. Der Hunger trieb die Frauen auf die Straße."
             },
             {
                 question: "Welchen Aspekt rückt Birthe Kundrus bei den 'Kriegerfrauen' besonders in den Fokus?",
@@ -294,7 +436,7 @@
                     "Den massiven wirtschaftlichen Reichtum, den Frauen durch Kriegsanleihen aufbauten."
                 ],
                 correct: 1,
-                explanation: "Stimmt! Kundrus betont die Ambivalenz: Der Staat sicherte das Überleben, agierte aber gleichzeitig als kontrollierender 'Ersatz-Patriarch'."
+                explanation: "Richtig! Kundrus betont die Ambivalenz: Der Staat sicherte zwar das Überleben durch Geld, agierte aber gleichzeitig über Wohlfahrtspflegerinnen als streng kontrollierender 'Ersatz-Patriarch'."
             }
         ];
 
